@@ -1,0 +1,25 @@
+body {
+  padding-top: 60px;
+}
+.mars {
+  padding: 40px 15px;
+  text-align: center;
+}
+.logo {
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  border-radius: 40px;
+  background-color: #d9534f;
+  width: 60px;
+  height: 60px;
+}
+.name,
+.temp,
+.date {
+  font-size: 36px;
+}
+
+.name {
+  color: #d9534f;
+  /*text-transform: uppercase;*/
+}

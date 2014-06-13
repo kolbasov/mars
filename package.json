@@ -1,0 +1,12 @@
+{
+  "name": "mars",
+  "description": "Weather data being transmitted by the Curiosity Rover on Mars",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "3.x",
+    "jade": "1.3.x",
+    "moment": "*"
+
+  }
+}

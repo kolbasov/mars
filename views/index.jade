@@ -1,0 +1,12 @@
+doctype html
+html
+	include header
+	body
+		div.container
+			div.mars
+				h1.lead.name The weather on Mars
+				p.lead.temp
+					span from !{minTemp}&#8451; to !{maxTemp}&#8451;
+				p.lead.date
+					span #{date}
+		include scripts
