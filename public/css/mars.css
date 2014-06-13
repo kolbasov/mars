@@ -5,9 +5,9 @@ html {
   min-height: 100%;
 }
 body {
+  padding-top: 30px;
   /* Margin bottom by footer height */
   margin-bottom: 60px;
-  padding-top: 60px;
 }
 #footer {
   position: absolute;
