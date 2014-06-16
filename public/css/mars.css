@@ -1,14 +1,24 @@
 /* Sticky footer styles
 -------------------------------------------------- */
+* {
+  -webkit-font-smoothing: antialiased;
+}
+
 html {
   position: relative;
   min-height: 100%;
 }
+
 body {
-  padding-top: 30px;
+  padding-top: 0px;
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
+
+h1, h2, h3, h4, h5, h6, p {
+  font-family: 'Myriad Set Pro', 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
+}
+
 #footer {
   position: absolute;
   bottom: 0;
@@ -16,10 +26,12 @@ body {
   /* Set the fixed height of the footer here */
   height: 60px;
 }
+
 .mars {
-  padding: 40px 15px;
+  padding: 0px 15px;
   text-align: center;
 }
+
 .logo {
   -webkit-border-radius: 40px;
   -moz-border-radius: 40px;
@@ -28,6 +40,7 @@ body {
   width: 60px;
   height: 60px;
 }
+
 .name,
 .temp,
 .date {

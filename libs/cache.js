@@ -1,14 +1,19 @@
 var moment = require('moment');
 
-var cache = { date: null, value: null };
+cache = {};
 
-exports.get = function() {
-	return cache.date == this.now() ? cache.value : null;
+exports.get = function(name) {
+	if(name in cache)
+		return cache[name].date == this.now() ? cache[name].value : null;
+	else
+		return null;
 } 
 
-exports.set = function(value) {
-	cache.date = this.now();
-	cache.value = value;
+exports.set = function(name, value) {
+	cache[name] = { 
+		date: this.now(), 
+		value: value 
+	};
 }
 
 exports.now = function() {

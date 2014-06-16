@@ -6,8 +6,7 @@ html
 			div.mars
 				h1.lead.name The weather on Mars
 				p.lead.temp
-					span from !{minTemp}&#8451; to !{maxTemp}&#8451;
-				p.lead.date
-					span #{date}
+					from !{minTemp}&#8451; to !{maxTemp}&#8451;	on #{date}
+		canvas#chart(height="360", class="center-block")
 		include footer			
 		include scripts
