@@ -32,7 +32,7 @@ exports.archive = function(res, cache) {
 	http.get("http://marsweather.ingenology.com/v1/archive/", function(mars) {
 		archiveReport(mars, function(report) {
 			cache.set(keys.archive, true);
-			fs.writeFile('public/js/data.js', 'var data=' + JSON.stringify(report));
+			fs.writeFile('public/js/data.js', 'var data=' + JSON.stringify(report) + ';');
 		});
 	}).on('error', function(err) {
 		res.send(500, err.message);

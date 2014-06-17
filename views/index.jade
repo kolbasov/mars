@@ -3,10 +3,13 @@ html
 	include header
 	body
 		div.container
-			div.mars
-				h1.lead.name The weather on Mars
-				p.lead.temp
-					from !{minTemp}&#8451; to !{maxTemp}&#8451;	on #{date}
-		canvas#chart(height="360", class="center-block")
+			div.mars.text-center
+				h1.lead.name 
+					|The weather on Mars from 
+					span.min !{minTemp}C 
+					|to 
+					span.max !{maxTemp}C 
+					|on #{date}
+			canvas#chart(height="420", class="center-block")
 		include footer			
 		include scripts

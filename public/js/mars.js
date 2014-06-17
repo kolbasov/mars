@@ -20,7 +20,7 @@ var styles = {
 $(function() {
 	data = $.extend(true, data, styles);
 	var ctx = $("#chart")[0].getContext("2d");
-	ctx.canvas.width  = $('.container').width();
+	ctx.canvas.width  = $('#chart').parent().width();
 	
 	var chart = new Chart(ctx).Line(
 		data, 
