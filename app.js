@@ -11,9 +11,9 @@ var app = express();
 app.use(express.static(pub));
 app.set('view engine', 'jade');
 
-app.get('/', function(req, earth) {
-	weather.latest(earth, cache);
-	weather.archive(earth, cache);
+app.get('/', function(req, res) {
+	weather.latest(res, cache);
+	weather.archive(res, cache);
 });
 
 var port = Number(process.env.PORT || 5000);
