@@ -2,32 +2,15 @@ var fs = require('fs'),
 	maas = require('./maas.js'),
 	report = require('./report.js');
 
-var keys = { latest: 'latest', archive: 'archive' };
+var keys = { archive: 'archive' };
 
-exports.latest = function(res, cache) {
-	
-	var result = cache.get(keys.latest);
+exports.get = function(res, cache) {
+	var result = cache.get(keys.archive);
 
 	if(result) {
 		res.render('index', result);
 		return;
 	}
-
-	maas.latest(function(err, data) {
-		if(err) {
-			res.send(500, err.message);
-			return;
-		}
-
-		result = report.latest(data);
-		cache.set(keys.latest, result);
-		res.render('index', result);		
-	});
-};
-
-exports.archive = function(res, cache) {
-	if(cache.get(keys.archive))
-		return;
 
 	maas.archive(function(err, data) {
 		if(err) {
@@ -35,9 +18,18 @@ exports.archive = function(res, cache) {
 			return;
 		}
 
+		var result = {
+			current: report.latest(data.results[0], cache), 
+			source: data
+		};
+
 		report.archive(data, function(report) {
-			cache.set(keys.archive, true);
-			fs.writeFile('public/js/data.js', 'var data=' + JSON.stringify(report) + ';');
+			result.temperature = report;
+			cache.set(keys.archive, result);
+	
+			fs.writeFile('public/js/data.js', 'var data=' + JSON.stringify(result) + ';', function() {
+				res.render('index', result);
+			});
 		});
 	});
 };

@@ -6,10 +6,39 @@ html
 			div.mars.text-center
 				h1.lead.name 
 					|The weather on Mars from 
-					span.min !{minTemp}C 
+					span.min !{current.minTemp}C 
 					|to 
-					span.max !{maxTemp}C 
-					|on #{date}
+					span.max !{current.maxTemp}C 
+					|on #{current.date}
+			div.text-center
+				div.btn-group
+					button#btnChart.btn.btn-default.btn-xs
+						span.glyphicon.glyphicon-stats 
+					button#btnTable.btn.btn-default.btn-xs
+						span.glyphicon.glyphicon-list
 			canvas#chart(height="420", class="center-block")
+			table#table.table.table-striped.hidden
+				thead
+					tr
+						th Terrestrial Date
+						th Min Temp
+						th Max Temp
+						th Atmospheric Pressure
+						th Atmospheric Opacity
+						th Season
+						th Sunrise
+						th Sunset
+				tbody
+					each item in source.results
+						tr
+							td= item.terrestrial_date
+							td= item.min_temp
+							td= item.max_temp
+							td= item.pressure
+							td= item.atmo_opacity
+							td= item.season
+							td= item.sunrise
+							td= item.sunset
+	
 		include footer			
 		include scripts

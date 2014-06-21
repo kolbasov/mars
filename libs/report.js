@@ -3,12 +3,10 @@ var moment = require('moment');
 exports.latest = function(data) {
 	var result = {};
 
-	var report = data.report;
-
-	result.date = formatDate(report.terrestrial_date);
-	result.minTemp = formatTemp(report.min_temp);
-	result.maxTemp = formatTemp(report.max_temp);
-
+	result.date = formatDate(data.terrestrial_date);
+	result.minTemp = formatTemp(data.min_temp);
+	result.maxTemp = formatTemp(data.max_temp);
+	
 	return result;
 };
 
