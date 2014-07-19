@@ -1,35 +1,63 @@
-var fs = require('fs'),
-	maas = require('./maas.js'),
-	report = require('./report.js');
+var moment 	= require('moment'),
+		report 	= require('./report.js');
+		maas 		= require('./maas.js')
+		db 			= require('./db.js');
 
-var keys = { archive: 'archive' };
+/**
+	Gets weather data.
 
-exports.get = function(res, cache) {
-	var result = cache.get(keys.archive);
+	@param {Function} callback
+*/
+exports.get = function(cb) {
+	getData(function(err, data) {
+		if(err) return cb(err);
 
-	if(result) {
-		res.render('index', result);
-		return;
-	}
-
-	maas.archive(function(err, data) {
-		if(err) {
-			res.send(500, err.message);
-			return;
+		if(!data || data.length == 0) {
+			cb(null, null);
 		}
 
+		data.forEach(report.format);
+
 		var result = {
-			current: report.latest(data.results[0], cache), 
+			current: report.short(data[0]),
 			source: data
 		};
 
-		report.archive(data, function(report) {
-			result.temperature = report;
-			cache.set(keys.archive, result);
-	
-			fs.writeFile('public/js/data.js', 'var data=' + JSON.stringify(result) + ';', function() {
-				res.render('index', result);
-			});
-		});
+		cb(null, result);
 	});
 };
+
+exports.chart = function(cb) {
+	getData(function(err, data) {
+		if(err) return cb(err);
+
+		if(!data || data.length == 0) {
+			cb(null, null);
+		}
+
+		var result = report.chart(data);
+		cb(null, result);
+	});
+};
+
+/**
+	Get latest data from MAAS and saves it in local db.
+*/
+exports.sync = function() {
+	maas.sync(function(err, data) {
+		if(err) {
+			console.log('Sync error: ', err);
+		} else {
+			console.log('Sync date: ', data);
+		}
+	});
+};
+
+function getData(cb) {
+	var days = 7;
+	var start = moment();
+	db.select(start, days, function(err, data) {
+		if(err) return cb(err);
+		cb(null, data);
+	});
+}

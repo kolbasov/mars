@@ -1,8 +1,6 @@
-var http = require('http')
-	fs = require('fs'),
-	express = require('express'),
-	weather = require('./libs/weather.js'),
-	cache = require('./libs/cache.js');
+var http 		= require('http'),
+		express = require('express'),
+		weather = require('./libs/weather.js');
 
 var pub = __dirname + '/public';
 
@@ -12,8 +10,23 @@ app.use(express.static(pub));
 app.set('view engine', 'jade');
 
 app.get('/', function(req, res) {
-	weather.get(res, cache);
+	weather.get(function(err, data) {
+		if(err) return res.send(500, err.message);
+		res.render('index', data);
+	});
 });
+
+app.get('/chart', function(req, res) {
+	weather.chart(function(err, data) {
+		if(err) return res.send(500, err.message);
+		res.send(200, data);
+	})
+});
+
+weather.sync();
+
+// Sync every hour.
+setInterval(weather.sync, 1000 * 3600 * 24);
 
 var port = Number(process.env.PORT || 5000);
 

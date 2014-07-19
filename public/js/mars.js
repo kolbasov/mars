@@ -18,25 +18,27 @@ var styles = {
 };
 
 $(function() {
-	data = $.extend(true, data.temperature, styles);
-	var ctx = $("#chart")[0].getContext("2d");
-	ctx.canvas.width  = $('#chart').parent().width();
-	
-	var chart = new Chart(ctx).Line(
-		data, 
-		{
-			datasetFill: false, 
-			scaleLabelFontFamily: "'Myriad Set Pro', 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif"
-		}
-	);
+	$.getJSON('/chart', function(data) {
+		data = $.extend(true, data, styles);
+		var ctx = $("#chart")[0].getContext("2d");
+		ctx.canvas.width  = $('#chart').parent().width();
 
-	$('#btnChart').click(function() {
-		$('#chart').show();
-		$('#table').addClass('hidden');
-	});
+		var chart = new Chart(ctx).Line(
+			data,
+			{
+				datasetFill: false,
+				scaleLabelFontFamily: "'Myriad Set Pro', 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif"
+			}
+		);
 
-	$('#btnTable').click(function() {
-		$('#chart').hide();
-		$('#table').removeClass('hidden');
+		$('#btnChart').click(function() {
+			$('#chart').show();
+			$('#table').addClass('hidden');
+		});
+
+		$('#btnTable').click(function() {
+			$('#chart').hide();
+			$('#table').removeClass('hidden');
+		});
 	});
 });

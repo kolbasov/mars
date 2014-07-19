@@ -1,23 +1,41 @@
-var moment = require('moment');
+var	util 		= require('util'),
+		moment 	= require('moment'),
+		df 			= require('./date-format.js');
 
-exports.latest = function(data) {
+/**
+	Builds a short report: date, min temp, max temp.
+
+	@param {Object} MAAS report
+	@return {Object} report
+*/
+exports.short = function(data) {
 	var result = {};
 
-	result.date = formatDate(data.terrestrial_date);
+	result.date = df.shortDate(data.terrestrial_date);
 	result.minTemp = formatTemp(data.min_temp);
 	result.maxTemp = formatTemp(data.max_temp);
-	
+
 	return result;
 };
 
-exports.archive = function(data, cb) {
+
+/**
+	Builds a report for a chart.
+
+	@param {Array} MAAS reports
+	@return {Object} report
+*/
+exports.chart = function(data) {
 	var report = {
 		labels: [],
 		datasets: [ { data: [] }, { data: [] } ]
 	};
 
-	for(i = 0; i < data.results.length; i++) {
-		var item = data.results[i];
+	for(i = 0; i < data.length; i++) {
+		var item = data[i];
+
+		this.format(item);
+
 		report.labels.push(item.terrestrial_date);
 		report.datasets[0].data.push(item.min_temp);
 		report.datasets[1].data.push(item.max_temp);
@@ -27,13 +45,26 @@ exports.archive = function(data, cb) {
 	report.datasets[0].data.reverse();
 	report.datasets[1].data.reverse();
 
-	cb(report);	
+	return report;
 };
 
-function formatTemp(t) {
-	return t > 0 ? '&plus;' + t : '&minus;' + Math.abs(t);
+/**
+	Formats dates in a report.
+
+	@param {Object} report
+*/
+exports.format = function(report) {
+	report.terrestrial_date = df.isoDate(report.terrestrial_date);
+	report.sunrise = df.isoDateTime(report.sunrise);
+	report.sunset = df.isoDateTime(report.sunset);
 }
 
-function formatDate(d) {
-	return moment(d).format('MMMM Do YYYY');
+/**
+	Replaces - and + with &minus; and &plus;
+
+	@param {Number} temperature
+	@return {String} formatted temperature
+*/
+function formatTemp(temp) {
+	return temp > 0 ? '&plus;' + t : '&minus;' + Math.abs(temp);
 }
