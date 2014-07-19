@@ -9,7 +9,15 @@ var	util 		= require('util'),
 	@return {Object} report
 */
 exports.short = function(data) {
-	var result = {};
+	var result = {
+		date: null,
+		minTemp: null,
+		maxTemp: null
+	};
+
+	if(!data) {
+		return result;
+	}
 
 	result.date = df.shortDate(data.terrestrial_date);
 	result.minTemp = formatTemp(data.min_temp);
@@ -30,6 +38,10 @@ exports.chart = function(data) {
 		labels: [],
 		datasets: [ { data: [] }, { data: [] } ]
 	};
+
+	if(!data) {
+		return report;
+	}
 
 	for(i = 0; i < data.length; i++) {
 		var item = data[i];

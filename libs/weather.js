@@ -12,10 +12,6 @@ exports.get = function(cb) {
 	getData(function(err, data) {
 		if(err) return cb(err);
 
-		if(!data || data.length == 0) {
-			cb(null, null);
-		}
-
 		data.forEach(report.format);
 
 		var result = {
@@ -30,10 +26,6 @@ exports.get = function(cb) {
 exports.chart = function(cb) {
 	getData(function(err, data) {
 		if(err) return cb(err);
-
-		if(!data || data.length == 0) {
-			cb(null, null);
-		}
 
 		var result = report.chart(data);
 		cb(null, result);
