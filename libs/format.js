@@ -40,3 +40,25 @@ exports.shortDate = function(date) {
 exports.addDays = function(date, days) {
   return moment(date).add('days', days);
 }
+
+/**
+  Returns time string from the specified date
+  in "HH:mm" format.
+
+  @param {Date} date
+  @return {String} time
+*/
+exports.time = function(date) {
+  return moment(date).utc().format("HH:mm");
+}
+
+/**
+  Formats temperature.
+
+  @param {Number} temp
+  @return {String} formatted temperature
+*/
+exports.temp = function(temp) {
+  if(!temp) return null;
+  return temp > 0 ? '&plus;' + temp : '&minus;' + Math.abs(temp);
+}

@@ -2,7 +2,7 @@ var url 		= require('url'),
 		restify = require('restify'),
 		moment 	= require('moment'),
 		db 			= require('./db.js'),
-		df 			= require('./date-format.js');
+		format 	= require('./format.js');
 
 var client = restify.createJsonClient({
 	url: 'http://marsweather.ingenology.com',
@@ -81,12 +81,12 @@ exports.sync = function(cb) {
 		var start = null;
 
 		if(latest && latest.terrestrial_date) {
-			start = df.addDays(latest.terrestrial_date, 1);
+			start = format.addDays(latest.terrestrial_date, 1);
 		} else {
 			start = moment(0);
 		}
 
-		start = df.isoDate(start);
+		start = format.isoDate(start);
 
 		exports.fromDate(start, function(err, data) {
 			if(err) return cb(err);

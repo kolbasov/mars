@@ -1,6 +1,6 @@
 var	util 		= require('util'),
 		moment 	= require('moment'),
-		df 			= require('./date-format.js');
+		format	= require('./format.js');
 
 /**
 	Builds a short report: date, min temp, max temp.
@@ -19,9 +19,9 @@ exports.short = function(data) {
 		return result;
 	}
 
-	result.date = df.shortDate(data.terrestrial_date);
-	result.minTemp = formatTemp(data.min_temp);
-	result.maxTemp = formatTemp(data.max_temp);
+	result.date = data.terrestrial_date;
+	result.minTemp = data.min_temp;
+	result.maxTemp = data.max_temp;
 
 	return result;
 };
@@ -46,7 +46,7 @@ exports.chart = function(data) {
 	for(i = 0; i < data.length; i++) {
 		var item = data[i];
 
-		this.format(item);
+		item.terrestrial_date = format.isoDate(item.terrestrial_date);
 
 		report.labels.push(item.terrestrial_date);
 		report.datasets[0].data.push(item.min_temp);
@@ -59,24 +59,3 @@ exports.chart = function(data) {
 
 	return report;
 };
-
-/**
-	Formats dates in a report.
-
-	@param {Object} report
-*/
-exports.format = function(report) {
-	report.terrestrial_date = df.isoDate(report.terrestrial_date);
-	report.sunrise = df.isoDateTime(report.sunrise);
-	report.sunset = df.isoDateTime(report.sunset);
-}
-
-/**
-	Replaces - and + with &minus; and &plus;
-
-	@param {Number} temperature
-	@return {String} formatted temperature
-*/
-function formatTemp(temp) {
-	return temp > 0 ? '&plus;' + t : '&minus;' + Math.abs(temp);
-}

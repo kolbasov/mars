@@ -12,8 +12,6 @@ exports.get = function(cb) {
 	getData(function(err, data) {
 		if(err) return cb(err);
 
-		data.forEach(report.format);
-
 		var result = {
 			current: report.short(data[0]),
 			source: data
@@ -26,7 +24,6 @@ exports.get = function(cb) {
 exports.chart = function(cb) {
 	getData(function(err, data) {
 		if(err) return cb(err);
-
 		var result = report.chart(data);
 		cb(null, result);
 	});
@@ -46,7 +43,7 @@ exports.sync = function() {
 };
 
 function getData(cb) {
-	var days = 7;
+	var days = 14;
 	var start = moment();
 	db.select(start, days, function(err, data) {
 		if(err) return cb(err);

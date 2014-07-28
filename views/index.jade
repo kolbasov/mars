@@ -4,16 +4,16 @@ html
 	body
 		div.container
 			div.mars.text-center
-				h1.lead.name 
-					|The weather on Mars from 
-					span.min !{current.minTemp}C 
-					|to 
-					span.max !{current.maxTemp}C 
-					|on #{current.date}
+				h1.lead.name
+					|The weather on Mars from&nbsp;
+					span.min !{format.temp(current.minTemp)}C&nbsp;
+					|to&nbsp;
+					span.max !{format.temp(current.maxTemp)}C&nbsp;
+					|on !{format.shortDate(current.date)}
 			div.text-center
 				div.btn-group
 					button#btnChart.btn.btn-default.btn-xs
-						span.glyphicon.glyphicon-stats 
+						span.glyphicon.glyphicon-stats
 					button#btnTable.btn.btn-default.btn-xs
 						span.glyphicon.glyphicon-list
 			canvas#chart(height="420", class="center-block")
@@ -31,14 +31,14 @@ html
 				tbody
 					each item in source
 						tr
-							td= item.terrestrial_date
-							td= item.min_temp
-							td= item.max_temp
+							td!= format.isoDate(item.terrestrial_date)
+							td!= format.temp(item.min_temp)
+							td!= format.temp(item.max_temp)
 							td= item.pressure
 							td= item.atmo_opacity
 							td= item.season
-							td= item.sunrise
-							td= item.sunset
-	
-		include footer			
+							td!= format.time(item.sunrise)
+							td!= format.time(item.sunset)
+
+		include footer
 		include scripts

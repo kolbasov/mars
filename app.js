@@ -1,6 +1,7 @@
 var http 		= require('http'),
 		express = require('express'),
-		weather = require('./libs/weather.js');
+		weather = require('./libs/weather.js'),
+		format 	= require('./libs/format.js');
 
 var pub = __dirname + '/public';
 
@@ -8,6 +9,8 @@ var app = express();
 
 app.use(express.static(pub));
 app.set('view engine', 'jade');
+
+app.locals.format = format;
 
 app.get('/', function(req, res) {
 	weather.get(function(err, data) {

@@ -1,6 +1,6 @@
-var pg 		= require('pg'),
-		maas 	= require('./maas.js'),
-		df 		= require('./date-format.js');
+var pg 		 = require('pg'),
+		maas 	 = require('./maas.js'),
+		format = require('./format.js');
 
 /**
 	Executes a query.
@@ -49,7 +49,7 @@ exports.select = function(start, days, cb) {
 		throw new Error('Number of days cannot be null');
 	}
 
-	end = df.isoDate(start);
+	end = format.isoDate(start);
 
 	var query = 'select * from data where terrestrial_date <= $1 order by terrestrial_date desc limit $2';
 
