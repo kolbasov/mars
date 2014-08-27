@@ -60,5 +60,6 @@ exports.time = function(date) {
 */
 exports.temp = function(temp) {
   if(!temp) return null;
-  return temp > 0 ? '&plus;' + temp : '&minus;' + Math.abs(Math.round(temp));
+  temp = Math.abs(Math.round(temp));
+  return temp > 0 ? '&plus;' + temp : '&minus;' + temp;
 }
