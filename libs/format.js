@@ -59,7 +59,16 @@ exports.time = function(date) {
   @return {String} formatted temperature
 */
 exports.temp = function(temp) {
-  if(!temp) return null;
-  temp = Math.abs(Math.round(temp));
-  return temp > 0 ? '&plus;' + temp : '&minus;' + temp;
+  if(!temp) 
+    return null;
+
+  temp = Math.round(temp);
+    
+  if(temp == 0)
+    return 0;
+    
+  if(temp > 0)
+    return '&plus;' + Math.abs(temp)
+  else
+    return '&minus;' + Math.abs(temp);
 }
