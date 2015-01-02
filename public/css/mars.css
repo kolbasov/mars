@@ -39,6 +39,7 @@ h1, h2, h3, h4, h5, h6, p {
   }
   .name, .temp, .date {
     font-size: 1em;
+    font-weight: 400;
   }     
   th, td, #footer {
     font-size: smaller;
