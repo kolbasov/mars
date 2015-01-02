@@ -29,3 +29,8 @@ node_modules
 
 public/js/data.js
 .env
+*.swp
+
+*.swp
+
+public/css/.mars.css.swp
