@@ -41,7 +41,28 @@ h1, h2, h3, h4, h5, h6, p {
     font-size: 1em;
     font-weight: 400;
   }     
+}
+
+@media(max-width: 768px) {
   th, td, #footer {
     font-size: smaller;
+  }
+}
+
+@media(max-width: 500px) {
+  .opacity, .pressure, .season, .sunrise, .sunset {
+    display: none;
+  }
+}
+
+@media(max-width: 668px) {
+  .pressure, .season, .sunrise, .sunset {
+    display: none;
+  }
+}
+
+@media(max-width: 1000px) {
+  .season, .sunrise, .sunset {
+    display: none;
   }
 }
