@@ -32,19 +32,15 @@ h1, h2, h3, h4, h5, h6, p {
   color: #d9534f;
 }
 
-/* [0, 768] */
-@media(max-width: 768px) {
+@media(max-width: 400px) {
+  .name {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
   .name, .temp, .date {
-    font-size: 1em;
+    font-size: small;
   }     
-  #footer {
-    font-size: 0.8em;
+  th, td, #footer {
+    font-size: smaller;
   }
 }
-
-/* [768, *] */
-@media(min-width: 768px) {
-  .name, .temp, .date {
-    font-size: 2.5em;
-  }
-} 
