@@ -23,22 +23,22 @@ html
 						th Terrestrial Date
 						th Min Temp
 						th Max Temp
-						th Atmospheric Pressure
-						th Atmospheric Opacity
-						th Season
-						th Sunrise
-						th Sunset
+						th.hidden-xs Atmospheric Pressure
+						th.hidden-xs Atmospheric Opacity
+						th.hidden-xs Season
+						th.hidden-xs Sunrise
+						th.hidden-xs Sunset
 				tbody
 					each item in source
 						tr
 							td!= format.isoDate(item.terrestrial_date)
 							td!= format.temp(item.min_temp)
 							td!= format.temp(item.max_temp)
-							td= item.pressure
-							td= item.atmo_opacity
-							td= item.season
-							td!= format.time(item.sunrise)
-							td!= format.time(item.sunset)
+							td.hidden-xs= item.pressure
+							td.hidden-xs= item.atmo_opacity
+							td.hidden-xs= item.season
+							td.hidden-xs!= format.time(item.sunrise)
+							td.hidden-xs!= format.time(item.sunset)
 
 		include footer
 		include scripts

@@ -25,14 +25,26 @@ h1, h2, h3, h4, h5, h6, p {
 .mars {
   margin-bottom: 20px;
 }
-.name,
-.temp,
-.date {
-  font-size: 36px;
-}
 .min {
   color: #428bca;
 }
 .max {
   color: #d9534f;
 }
+
+/* [0, 768] */
+@media(max-width: 768px) {
+  .name, .temp, .date {
+    font-size: 1em;
+  }     
+  #footer {
+    font-size: 0.8em;
+  }
+}
+
+/* [768, *] */
+@media(min-width: 768px) {
+  .name, .temp, .date {
+    font-size: 2.5em;
+  }
+} 
