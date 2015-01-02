@@ -38,7 +38,7 @@ h1, h2, h3, h4, h5, h6, p {
     margin-bottom: 10px;
   }
   .name, .temp, .date {
-    font-size: small;
+    font-size: 1em;
   }     
   th, td, #footer {
     font-size: smaller;
